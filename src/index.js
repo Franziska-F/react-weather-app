@@ -64,7 +64,13 @@ function App() {
               </div>
               <div className="col-8">
                 <div className="dailyForecast">
-                  <span className="weather-icon">💨</span>
+                  <span
+                    className="weather-icon"
+                    role="img"
+                    aria-label="cloud and wind"
+                  >
+                    💨
+                  </span>
                   <span className="weatherText" id="description"></span>
                 </div>
                 <ul id="weather-info">
