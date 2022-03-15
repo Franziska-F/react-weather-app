@@ -57,7 +57,7 @@ function App() {
                       8
                     </span>
                     <span className="unit">
-                      <a> °C </a>
+                      <span> °C </span>
                     </span>
                   </div>
                 </div>
@@ -83,10 +83,14 @@ function App() {
           </div>
         </div>
         <div className="footer">
-          <a href="https://github.com/Franziska-F/Weather-App" target="_blank">
-            Coded
+          <a
+            href="https://github.com/Franziska-F/react-weather-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open-source code
           </a>
-          by Franziska Fouchs
+          <span> by Franziska Fouchs</span>
         </div>
       </div>
     </div>
