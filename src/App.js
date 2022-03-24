@@ -1,16 +1,12 @@
-import React {useState} from "react";
+import React from "react";
+import ReactDOM from "react-dom";
 import "./index.css";
-import axios from "axios";
+import "bootstrap/dist/css/bootstrap.css";
 
-export default function Weather() {
-    const [ready, setReady] = useState(false);
-    setTemperature(response.data.main.temp);
-    setReady(true);
-  
-}
-if (ready) {
-    return (
+import reportWebVitals from "./reportWebVitals";
 
+export default function App() {
+  return (
     <div className="main">
       <div className="container">
         <div className="card">
@@ -104,14 +100,18 @@ if (ready) {
           <span> by Franziska Fouchs</span>
         </div>
       </div>
-    </div>);
-  
+    </div>
+  );
 }
-else {const apiKey = `8c4070f08d562986da25915538f23e1a`;
-  let city = "Vienna";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-  axios.get(apiUrl).then(handleResponse);
 
-  return ("Loeading...")
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
 
-}
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
