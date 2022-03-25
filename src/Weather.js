@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import "./index.css";
 import axios from "axios";
-import FormatedDate from "./FormatedDate";
+import App from "./App.js";
 
-export default function Weather() {
+import WeatherInfo from "./WeatherInfo";
+
+export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
+
+  const [city, setCity] = useState(props.defaultCity);
   function handleResponse(response) {
     setWeatherData({
       ready: true,
@@ -14,7 +18,21 @@ export default function Weather() {
       humidity: response.data.main.humidity,
       city: response.data.name,
       description: response.data.weather[0].description,
+      iconUrl: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
     });
+  }
+  function search() {
+    const apiKey = `8c4070f08d562986da25915538f23e1a`;
+
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+  function handelCityChange(event) {
+    setCity(event.target.value);
   }
   if (weatherData.ready) {
     return (
@@ -28,7 +46,7 @@ export default function Weather() {
             </div>
 
             <div className="card-body">
-              <form id="searchForm">
+              <form id="searchForm" onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col">
                     <div className="form-group">
@@ -36,8 +54,9 @@ export default function Weather() {
                         type="search"
                         placeholder="e.g. Vienna"
                         className="form-control"
-                        autofocus
+                        autofocus="on"
                         id="search-input"
+                        onChange={handelCityChange}
                       />
                       <div className="form-text">City, region, village...</div>
                     </div>
@@ -52,54 +71,7 @@ export default function Weather() {
               </form>
               <br />
               <br />
-              <div className="row">
-                <div className="col">
-                  <div className="card border-0">
-                    <div className="card-body">
-                      <h5 className="card-title text-muted" id="city-input">
-                        {weatherData.city}
-                      </h5>
-                      <h6
-                        className="card-subtitle mb-2 text-muted"
-                        id="main-date"
-                      >
-                        <FormatedDate date={weatherData.date} />
-                      </h6>
-                      <span className="mainTemerature" id="temp">
-                        {Math.round(weatherData.temperature)}
-                      </span>
-                      <span className="unit">
-                        <span> °C </span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-8">
-                  <div className="dailyForecast">
-                    <span
-                      className="weather-icon"
-                      role="img"
-                      aria-label="cloud and wind"
-                    >
-                      💨
-                    </span>
-                    <span className="weatherText" id="description">
-                      {weatherData.description}
-                    </span>
-                  </div>
-                  <ul id="weather-info">
-                    <li>
-                      <span id="more-info">Min.:_ Max.:_</span>
-                    </li>
-                    <li>
-                      <span id="humidity">
-                        Humiditiy: {weatherData.humidity} %
-                      </span>
-                      <span id="wind">Wind: {weatherData.wind} km/h</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <WeatherInfo data={weatherData} />
               <hr />
               <div className="forecast" id="forecast-row"></div>
             </div>
@@ -108,11 +80,7 @@ export default function Weather() {
       </div>
     );
   } else {
-    const apiKey = `8c4070f08d562986da25915538f23e1a`;
-    let city = "Malaga";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-    axios.get(apiUrl).then(handleResponse);
-
+    search();
     return "Loeading...";
   }
 }
