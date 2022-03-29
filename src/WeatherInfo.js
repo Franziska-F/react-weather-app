@@ -1,5 +1,6 @@
 import React from "react";
 import FormatedDate from "./FormatedDate";
+import DisplayUnit from "./DisplayUnit";
 
 export default function WeatherInfo(props) {
   return (
@@ -14,12 +15,9 @@ export default function WeatherInfo(props) {
               <h6 className="card-subtitle mb-2 text-muted" id="main-date">
                 <FormatedDate date={props.data.date} />
               </h6>
-              <span className="mainTemerature" id="temp">
-                {Math.round(props.data.temperature)}
-              </span>
-              <span className="unit">
-                <span> °C </span>
-              </span>
+              <div>
+                <DisplayUnit celsius={props.data.temperature} />
+              </div>
             </div>
           </div>
         </div>
@@ -30,17 +28,16 @@ export default function WeatherInfo(props) {
               alt="icon that matches current weather"
               src={props.data.iconUrl}
             />
-            <p className="weatherText" id="description">
+            <p className="weatherText text-center" id="description">
               {props.data.description}
             </p>
           </div>
           <ul id="weather-info">
-            <li>
-              <span id="more-info">Min.:_ Max.:_</span>
-            </li>
-            <li>
-              <span id="humidity">Humiditiy: {props.data.humidity} %</span>
-              <span id="wind">Wind: {props.data.wind} km/h</span>
+            <li className="text-center">
+              <span id="humidity">Humiditiy: {props.data.humidity} % </span>
+              <span id="wind">
+                Wind: {Math.round(props.data.wind * 3.6)} km/h
+              </span>
             </li>
           </ul>
         </div>

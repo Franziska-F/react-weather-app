@@ -35,46 +35,42 @@ export default function Weather(props) {
   }
   if (weatherData.ready) {
     return (
-      <div className="main">
-        <div className="container">
-          <div className="card">
-            <div className="card-header bg-transparent">
-              <h3>
-                <i className="fas fa-frog frog-icon" id="frog"></i> Weather App
-              </h3>
-            </div>
+      <div className="card">
+        <div className="card-header bg-transparent">
+          <h3>
+            <i className="fas fa-frog frog-icon" id="frog"></i> Weather App
+          </h3>
+        </div>
 
-            <div className="card-body">
-              <form id="searchForm" onSubmit={handleSubmit}>
-                <div className="row">
-                  <div className="col">
-                    <div className="form-group">
-                      <input
-                        type="search"
-                        placeholder="e.g. Vienna"
-                        className="form-control"
-                        autofocus="on"
-                        id="search-input"
-                        onChange={handelCityChange}
-                      />
-                      <div className="form-text">City, region, village...</div>
-                    </div>
-                  </div>
-
-                  <div className="col">
-                    <button type="submit" className="btn btn-primary w-50">
-                      Search
-                    </button>
-                  </div>
+        <div className="card-body">
+          <form id="searchForm" onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="col">
+                <div className="form-group">
+                  <input
+                    type="search"
+                    placeholder="e.g. Vienna"
+                    className="form-control"
+                    autofocus="on"
+                    id="search-input"
+                    onChange={handelCityChange}
+                  />
+                  <div className="form-text">City, region, village...</div>
                 </div>
-              </form>
-              <br />
-              <br />
-              <WeatherInfo data={weatherData} />
-              <hr />
-              <div className="forecast" id="forecast-row"></div>
+              </div>
+
+              <div className="col">
+                <button type="submit" className="btn btn-primary w-50">
+                  Search
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
+          <br />
+          <br />
+          <WeatherInfo data={weatherData} />
+          <hr />
+          <div className="forecast" id="forecast-row"></div>
         </div>
       </div>
     );

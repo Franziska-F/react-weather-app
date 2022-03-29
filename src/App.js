@@ -8,18 +8,20 @@ import reportWebVitals from "./reportWebVitals";
 export default function App() {
   return (
     <div className="App">
-      <div className="container">
-        <Weather defaultCity="Vienna" />
+      <div className="main">
+        <div className="container">
+          <Weather defaultCity="Vienna" />
 
-        <div className="footer">
-          <a
-            href="https://github.com/Franziska-F/react-weather-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open-source code
-          </a>
-          <span> by Franziska Fouchs</span>
+          <div className="footer">
+            <a
+              href="https://github.com/Franziska-F/react-weather-app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open-source code
+            </a>
+            <span> by Franziska Fouchs</span>
+          </div>
         </div>
       </div>
     </div>
